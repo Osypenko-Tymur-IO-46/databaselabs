@@ -1,15 +1,3 @@
-# Осипенко Тимур ІО-46 Лабораторна робота 2: Перетворення ER-діаграми на схему PostgreSQL
-## Цілі
-- Написати SQL DDL-інструкції для створення кожної таблиці з вашої ERD в PostgreSQL.
-- Вказати відповідні типи даних для кожного стовпця, вибрати первинний ключ для кожної таблиці та визначити будь-які необхідні зовнішні ключі, обмеження UNIQUE, NOT NULL, CHECK або DEFAULT.
-- Вставити зразки рядків (принаймні 3–5 рядків на таблицю) за допомогою INSERT INTO.
-- Протестувати все в pgAdmin (або іншому клієнті PostgreSQL), щоб переконатися, що таблиці та дані завантажуються правильно.
----
-## Хід роботи
-### Діаграма з першої лабораторної роботи
-![ER-діаграма](../lab1/Modeldatabases.png)
-### create-insert.sql
-~~~
 
 create table program_user(
  user_id serial primary key,
@@ -93,28 +81,4 @@ insert into user_comment(comment_id, author_id, video_id, parent_comment_id, com
 
 insert into score(user_id, video_id, comment_id, score) values
 	(1, null, 2, 5), (1, 3, null, 2), (4, 2, null, 4), (4, null, 4, 1);
-~~~
-### Докази заповнення таблиць
-![program_user](program_user.png)
-![score](score.png)
-![videos](video.png)
-### Структура 
-- program_user
-    - Містить дані про користувача
-    - Передає PK усім іншим таблицям
-- subscriber
-    - Реалізує зв'язок користувач-користувач
-    - PK складається з об'єднання PK підписника та підписки
-- video
-    - Містить дані про відео
-    - Передає PK до user_comment, vid_views, score
-- vid_views
-    - Реалізує багато-до-багатьох зв'язок користувач-відео
-    - PK складається з об'єднання PK глядача та відео
-- user_comment 
-    - приймає PK від користувача, а також від іншого коментаря або відео
-    - передає PK до score
-- score 
-    - не має PK, його функцію виконує або user-video або user-comment
-### Згенерована ERD
-![ERD](generd.png)
+	
